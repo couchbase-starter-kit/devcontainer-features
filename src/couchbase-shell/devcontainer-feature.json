@@ -1,0 +1,9 @@
+{
+    "name": "Couchbase Shell",
+    "id": "couchbase-shell",
+    "version": "1.0.0",
+    "description": "Couchbase Shell is the CLI for Couchbase Server",
+    "installsAfter": [
+        "ghcr.io/devcontainers/features/common-utils"
+    ]
+}

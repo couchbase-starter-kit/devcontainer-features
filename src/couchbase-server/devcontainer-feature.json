@@ -1,0 +1,47 @@
+{
+    "name": "Couchbase",
+    "id": "couchbase-server",
+    "version": "1.0.0",
+    "description": "Installs Couchbase Server along with needed dependencies.",
+    "options": {
+        "cbversion": {
+            "type": "string",
+            "proposals": [
+                "7.6.3",
+                "7.6.2"
+            ],
+            "default": "7.6.3",
+            "description": "Select or enter a version of Couchbase"
+        }
+    },
+    "mounts": [
+        {
+            "source": "dind-var-lib-couchbase-${devcontainerId}",
+            "target": "/opt/couchbase/var",
+            "type": "volume"
+        }
+    ],
+    "containerEnv": {
+        "PATH": "${PATH}:/opt/couchbase/bin:/opt/couchbase/bin/tools:/opt/couchbase/bin/install",
+        "COUCHBASE_CONNECTION_STRING": "couchbase://localhost",
+        "COUCHBASE_USERNAME": "Administrator",
+        "COUCHBASE_PASSWORD": "password",
+        "COUCHBASE_USE_CAPELLA": "false",
+        "COUCHBASE_DEFAULT_BUCKET": "default",
+        "COUCHBASE_DEFAULT_SCOPE": "_default",
+        "COUCHBASE_DEFAULT_COLLECTION": "_default",
+        "COUCHBASE_OTLP_ENABLED": "false"
+    },
+    "entrypoint": "/entrypoint.sh couchbase-server",
+    "privileged": true,
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "couchbase.vscode-couchbase"
+            ]
+        }
+    },
+    "installsAfter": [
+        "ghcr.io/devcontainers/features/common-utils"
+    ]
+}
