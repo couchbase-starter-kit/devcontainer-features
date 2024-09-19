@@ -17,8 +17,8 @@ of an `options` object.
 {
   "image": "mcr.microsoft.com/devcontainers/universal",
   "features": {
-    "ghcr.io/ldoguin/devcontainer-features/couchbase-server": {},
-    "ghcr.io/ldoguin/devcontainer-features/couchbase-shell": {}
+    "ghcr.io/couchbase-starter-kit/devcontainer-features/couchbase-server": {},
+    "ghcr.io/couchbase-starter-kit/devcontainer-features/couchbase-shell": {}
   }
 }
 ```
