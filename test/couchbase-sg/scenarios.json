@@ -1,15 +1,9 @@
 {
-    "all": {
+    "version_3.2.0": {
         "image": "mcr.microsoft.com/devcontainers/base:ubuntu-22.04",
         "features": {
             "couchbase-sg": {
                 "sgversion": "3.2.0"
-            },
-            "couchbase-server": {
-                "cbversion": "7.6.3"
-            },
-            "couchbase-shell": {
-                "cbshversion": "1.0.0"
             }
         }
     }

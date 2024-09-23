@@ -3,6 +3,7 @@
     "id": "couchbase-shell",
     "version": "1.0.0",
     "description": "Couchbase Shell is the CLI for Couchbase Server",
+    "documentationURL": "https://github.com/couchbase-starter-kit/devcontainer-features/tree/main/src/couchbase-shell",
     "installsAfter": [
         "ghcr.io/devcontainers/features/common-utils"
     ]

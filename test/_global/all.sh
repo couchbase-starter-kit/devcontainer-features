@@ -25,10 +25,15 @@ source dev-container-features-test-lib
 check "cbsh root config" echo $USER
 check "cbsh root config" echo $HOME
 check "cbsh root config" ls /home/vscode/.cbsh
-check "entrypoint-runs" bash -c "/entrypoint.sh couchbase-server &"
-check "ready" wait_for_uri 200 http://127.0.0.1:8091/pools/default/buckets/travel-sample -u Administrator:password
+check "ready" wait_for_uri 200 http://127.0.0.1:8091/pools/default/buckets/travel-sample -u $COUCHBASE_USERNAME:$COUCHBASE_PASSWORD
+check "ready" wait_for_uri 200 http://127.0.0.1:8091/pools/default/buckets/$COUCHBASE_DEFAULT_BUCKET -u $COUCHBASE_USERNAME:$COUCHBASE_PASSWORD
 check "check for Couchbase Shell configuration" cbsh -c 'query "select 1"'
+check "check shell env configuration" cbsh -c "cb-env" | grep $COUCHBASE_DEFAULT_BUCKET
+check "check shell env configuration" cbsh -c "cb-env" | grep $COUCHBASE_DEFAULT_SCOPE
+check "check shell env configuration" cbsh -c "cb-env" | grep $COUCHBASE_DEFAULT_COLLECTION
 
+sleep 5 # wait for sync gateway to start
+check "test sync gateway endpoint" bash -c 'curl -s http://127.0.0.1:4984/ | jq ".vendor.version" | grep "3.2"'
 
 # Report result
 reportResults

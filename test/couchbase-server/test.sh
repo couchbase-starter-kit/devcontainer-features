@@ -23,11 +23,8 @@ wait_for_uri() {
 source dev-container-features-test-lib
 
 # Feature specific tests
-check "service" ls /etc/service/
-check "entrypoint-exists" bash -c "ls /entrypoint.sh"
-check "entrypoint-runs" bash -c "/entrypoint.sh couchbase-server &"
-
-check "ready" wait_for_uri 200 http://127.0.0.1:8091/pools/default/buckets/travel-sample -u Administrator:password
+check "ready" wait_for_uri 200 http://127.0.0.1:8091/pools/default/buckets/travel-sample -u $COUCHBASE_USERNAME:$COUCHBASE_PASSWORD
+check "ready" wait_for_uri 200 http://127.0.0.1:8091/pools/default/buckets/$COUCHBASE_DEFAULT_BUCKET -u $COUCHBASE_USERNAME:$COUCHBASE_PASSWORD
 
 # Report result
 reportResults

@@ -87,7 +87,6 @@ setup_couchbase() {
     cp $BASE_DIR/entrypoint.sh /entrypoint.sh
 
     # Add couchbase-shell config
-    cp $BASE_DIR/cbshconfig /opt/couchbase/cbshconfig
     cp $BASE_DIR/installCbshConfig.sh /opt/couchbase/installCbshConfig.sh
 }
 

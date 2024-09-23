@@ -1,0 +1,24 @@
+{
+    "name": "Couchbase Sync Gateway",
+    "id": "couchbase-sg",
+    "version": "1.0.0",
+    "description": "Installs Couchbase Sync Gateway along with needed dependencies.",
+    "documentationURL": "https://github.com/couchbase-starter-kit/devcontainer-features/tree/main/src/couchbase-sg",
+    "options": {
+        "sgversion": {
+            "type": "string",
+            "proposals": [
+                "3.2.0"
+            ],
+            "default": "3.2.0",
+            "description": "Select or enter a version of Couchbase Sync Gateway"
+        }
+    },
+    "containerEnv": {
+        "PATH": "/opt/couchbase-sync-gateway/bin:${PATH}"
+    },
+    "privileged": true,
+    "installsAfter": [
+        "ghcr.io/devcontainers/features/common-utils"
+    ]
+}

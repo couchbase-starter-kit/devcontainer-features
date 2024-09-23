@@ -1,0 +1,39 @@
+{
+    "bootstrap": {
+      "server": "${COUCHBASE_CONNECTION_STRING}", 
+      "username": "${COUCHBASE_USERNAME}", 
+      "password": "${COUCHBASE_PASSWORD}",
+      "server_tls_skip_verify": true, 
+      "use_tls_server": false 
+    },
+	"logging": {
+	  "log_file_path": "/var/tmp/sglogs",
+    "redaction_level": "partial",
+	  "console": {
+      "log_level": "error",
+      "log_keys": ["*"]
+	  },
+	  "error": {
+      "enabled": true,
+      "rotation": {
+        "max_size": 20,
+        "max_age": 180
+      }
+	  },
+	  "warn": {
+      "enabled": true,
+      "rotation": {
+        "max_size": 20,
+        "max_age": 90
+      }
+	  },
+	  "info": {
+	  	"enabled": false
+	  },
+	  "debug": {
+		  "enabled": false
+	  }
+	}
+}
+
+  

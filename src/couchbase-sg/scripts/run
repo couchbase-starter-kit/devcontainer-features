@@ -1,0 +1,43 @@
+#!/bin/sh
+
+
+exec 2>&1
+
+wait_for_uri() {
+  expected=$1
+  shift
+  uri=$1
+  echo "Waiting for $uri to be available..."
+  while true; do
+    status=$(curl -s -w "%{http_code}" -o /dev/null $*)
+    if [ "x$status" = "x$expected" ]; then
+      break
+    fi
+    echo "$uri not up yet, Sync Gateway waiting 2 seconds..."
+    sleep 2
+  done
+  echo "$uri ready, continuing"
+}
+
+# If container is running as root, ensure contents of /opt/couchbase/var are
+# owned by the 'couchbase' user. If running as 'couchbase', don't attempt to
+# claim ownership, but instead warn when encountering unwritable paths.
+# Skip "inbox" as it may contain readonly-mounted things like k8s certs.
+container_user=$(whoami)
+if [ "${container_user}" = "root" ]; then
+    find var -path /opt/couchbase-sync-gateway/data -prune -o -print0 | \
+      xargs -0 chown --no-dereference couchbase:couchbase
+else
+    find var -path /opt/couchbase-sync-gateway/data -prune -o \! -writable -print0 | \
+      xargs -0 -I {} echo "Warning: '/opt/couchbase-sync-gateway/{}' is not writable by user '${container_user}'"
+fi
+unset container_user
+
+wait_for_uri 200 http://127.0.0.1:8091/pools/default/buckets/$COUCHBASE_DEFAULT_BUCKET -u $COUCHBASE_USERNAME:$COUCHBASE_PASSWORD
+
+
+if [ "$(whoami)" = "couchbase" ]; then
+  exec sync_gateway /etc/sync_gateway/config.json
+else
+  exec chpst -ucouchbase  sync_gateway /etc/sync_gateway/config.json
+fi
