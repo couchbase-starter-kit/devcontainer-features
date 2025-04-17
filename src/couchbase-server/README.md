@@ -1,5 +1,5 @@
 
-# Couchbase Server (couchbase-server)
+# Couchbase (couchbase-server)
 
 Installs Couchbase Server along with needed dependencies.
 
@@ -7,7 +7,7 @@ Installs Couchbase Server along with needed dependencies.
 
 ```json
 "features": {
-    "ghcr.io/doguin/devcontainer-features/couchbase:1": {}
+    "ghcr.io/ldoguin/devcontainer-features/couchbase-server:1": {}
 }
 ```
 
@@ -15,7 +15,7 @@ Installs Couchbase Server along with needed dependencies.
 
 | Options Id | Description | Type | Default Value |
 |-----|-----|-----|-----|
-| version | Select or enter a Couchbase Server version. | string | 7.6.3 |
+| cbversion | Select or enter a version of Couchbase | string | 7.6.3 |
 
 ## Customizations
 
@@ -24,9 +24,7 @@ Installs Couchbase Server along with needed dependencies.
 - `couchbase.vscode-couchbase`
 
 
-## OS Support
 
-This Feature should work on recent versions of Debian/Ubuntu-based distributions with the `apt` package manager installed.
+---
 
-`bash` is required to execute the `install.sh` script.
-
+_Note: This file was auto-generated from the [devcontainer-feature.json](https://github.com/ldoguin/devcontainer-features/blob/main/src/couchbase-server/devcontainer-feature.json).  Add additional notes to a `NOTES.md`._
